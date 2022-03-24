@@ -62,6 +62,7 @@ public class Heap {
 		if (index >= size) {
 			return;
 		}
+		
 		Heap[index] = element;
 		int current = index;
 

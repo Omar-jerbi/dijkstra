@@ -44,4 +44,10 @@ public class Grafo {
 	}
 	
 	
+	public int numNodes() {
+		return _n;
+	}
+	
+	
+	
 }

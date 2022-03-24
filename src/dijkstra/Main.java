@@ -1,45 +1,44 @@
 package dijkstra;
 
+import java.util.ArrayList;
+
 public class Main {
 
-	public static void dijkstra(Grafo g, Nodo s, int[] aDist, Nodo[] aParent) {
-		for(var u:g._grafo) {
-			aDist[u.get(0).from.etichetta] = Nodo.INF;
+	public static void dijkstra(Grafo g, Nodo s, ArrayList<Integer> aDist, ArrayList<Nodo> aParent) {
+		for(var i = 0; i < g.numNodes(); i++) {
+			aDist.add(Nodo.INF);
+			aParent.add(null);
 		}
-			
-		aDist[s.etichetta] = 0;
-				
-		aParent[s.etichetta] = null;
-		
-		var H = new Heap(6);
-		
-		for(var u:g._grafo) {
-			H.insert(u.get(0).from, aDist[u.get(0).from.etichetta]);
+		aDist.add(s.etichetta, 0);
+		//aParent.add(s.etichetta, null);
+		var H = new Heap(g.numNodes());
+		for(var Ls_archi:g._grafo) {
+			H.insert(Ls_archi.get(0).from, aDist.get(Ls_archi.get(0).from.etichetta));
 		}
 		
-		
+
 		while(!H.isEmpty()) {
 			Nodo x = H.getMin();
-			
 			for(var lista_archi:g._grafo) {
-				if(lista_archi.get(0).from.etichetta == x.etichetta) {
-					for(var arco:lista_archi) {
-//						if(arco.to != null) {
-//							if(aDist[lista_archi.get(0).from.etichetta] + arco.peso 
-//									< 
-//									aDist[arco.to.etichetta]) {
-//								aParent[arco.to.etichetta] = lista_archi.get(0).from;
-//								H.changePriority(arco.to, aDist[arco.to.etichetta]);
+				if(lista_archi.get(0).from.etichetta == x.etichetta) { //per ogni arco di x
+					for(var arco:lista_archi) { //per ogni arco di x
+						if(arco.to != null) { //per ogni arco di x
+//							if(aDist.get(x.etichetta) + arco.peso < aDist.get(arco.to.etichetta)) 
+//							{						
+//								aParent.add(arco.to.etichetta, lista_archi.get(0).from);
+//								H.changePriority(arco.to, aDist.get(arco.to.etichetta));
 //							}	
-//						}
-						System.out.println(arco.from.etichetta +" "+
-								(arco.to != null ? arco.to.etichetta : "vuoto") +
-										" "+arco.peso);
+	
+						}
+						
+//						System.out.println(arco.from.etichetta +" "+
+//								(arco.to != null ? arco.to.etichetta+ " " + arco.peso : "---------"));
 					}					
 				}
 
 			}
 		}
+		
 	}
 	
 	
@@ -72,10 +71,9 @@ public class Main {
 		g.addArc(n4, n5, 4);
 		
 		
-		//System.out.println(g._grafo.get(1).get(1).to.etichetta); //B == 2
 		
-		var aDist = new int[6];
-		Nodo[] aParent = new Nodo[6];
+		var aDist = new ArrayList<Integer>();		
+		var aParent = new ArrayList<Nodo>();
 		
 		dijkstra(g, n0, aDist, aParent);
 

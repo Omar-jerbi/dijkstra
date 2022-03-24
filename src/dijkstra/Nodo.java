@@ -4,7 +4,7 @@ public class Nodo {
 	public static final int INF = 1234;
 	
 	public int etichetta;
-	public int peso;
+	public int peso; //per Heap
 	
 	public Nodo(int e) {
 		etichetta = e;
